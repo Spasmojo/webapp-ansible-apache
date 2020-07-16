@@ -1,0 +1,18 @@
+---
+- name: "Déploiement d'Apache via Docker"
+  hosts: prod
+  become: yes
+  pre_tasks:
+    - name: "installation des dépendances"
+      yum:
+        name: python-docker-py
+        state: present
+        update_cache: yes
+  tasks:
+    - name: "création du container"
+      docker_container:
+        name: webapp
+        image: httpd
+        state: started
+        ports: 
+          - "80:80"
