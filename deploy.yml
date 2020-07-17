@@ -2,6 +2,8 @@
 - name: Deploiement d'Apache via Docker
   hosts: prod
   become: yes
+  vars_files:
+    - files/secrets/credentials.yml
   pre_tasks:
     - name: installation des dependances
       yum:
