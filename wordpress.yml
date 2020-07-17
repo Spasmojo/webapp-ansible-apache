@@ -1,0 +1,15 @@
+---
+- name: install worpress
+  hosts: prod
+  become: yes
+  vars_files:
+    - files/secrets/credentials.yml
+  vars:
+    - system_user: admin
+  pre_tasks:
+    - name: create www-data user
+      user:
+        name: www-data
+        state: present
+  roles:
+    - wordpress
